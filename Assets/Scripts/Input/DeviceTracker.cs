@@ -85,7 +85,7 @@ public abstract class DeviceTracker : MonoBehaviour {
 	/// </summary>
 	protected void SendData() {
 		if (hasNewData) {
-			im.TakeInput(inputData);
+			im.TakeInput(inputData, this);
 			inputData.Reset();
 			hasNewData = false;
 		}

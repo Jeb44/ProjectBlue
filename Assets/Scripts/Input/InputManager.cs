@@ -2,11 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/* TODO:
+ * - create device manager to control current device (+ interface for ui later on)
+ * 
+ */
+
 public class InputManager : MonoBehaviour {
 
 	[Range(0, 4)] public int axisCount;
 	[Range(0, 20)] public int buttonCount;
-	
+
+	private DeviceTracker currentTracker;
+
 	public void RefreshTracker() {
 		DeviceTracker[] tracker = GetComponents<DeviceTracker>();
 		if (tracker != null) {
@@ -16,8 +23,13 @@ public class InputManager : MonoBehaviour {
 		}
 	}
 
-	public void TakeInput(InputData inputData) {
+	public void TakeInput(InputData inputData, DeviceTracker tracker) {
+		if(currentTracker != tracker) {
+			currentTracker = tracker;
+			Debug.Log("Device changed!");
+		}
 		//DebugInput(inputData);
+		//Give input to Controller
 	}
 
 	void DebugInput(InputData inputData) {

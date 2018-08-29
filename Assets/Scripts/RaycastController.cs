@@ -68,14 +68,4 @@ public class RaycastController : MonoBehaviour {
 		raycastOrigin.topLeft = new Vector2(bounds.min.x, bounds.max.y);
 		raycastOrigin.topRight = new Vector2(bounds.max.x, bounds.max.y);
 	}
-
-
-	/// <summary>
-	/// Defined points, where (Collision) Raycast should originate form. 
-	/// These points should be set in a seperate function every frame.
-	/// </summary>
-	public struct RaycastOrigin {
-		public Vector2 topLeft, topRight;
-		public Vector2 bottomLeft, bottomRight;
-	}
 }
