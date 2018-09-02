@@ -13,8 +13,10 @@ public class InputManager : MonoBehaviour {
 	[Range(0, 20)] public int buttonCount;
 
 	private DeviceTracker currentTracker;
+	public PlayerController controller;
 
 	public void RefreshTracker() {
+		//create seperate class 'deviceManager' for managing devices
 		DeviceTracker[] tracker = GetComponents<DeviceTracker>();
 		if (tracker != null) {
 			for(int i = 0; i < tracker.Length; i++) {
@@ -30,6 +32,8 @@ public class InputManager : MonoBehaviour {
 		}
 		//DebugInput(inputData);
 		//Give input to Controller
+
+		//controller.TakeInput(inputData);
 	}
 
 	void DebugInput(InputData inputData) {

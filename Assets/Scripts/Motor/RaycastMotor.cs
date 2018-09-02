@@ -1,13 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 //RequireComponent should not only be BoxCollider2D
 //When implementing the character/objects,
 //please revisit this script
 
+/// <summary>
+/// Loads raycast data inside the RaycastOrigin struct.
+/// Use this as base class whenever you work with Collider2D.
+/// </summary>
 [RequireComponent(typeof(BoxCollider2D))]
-public class BaseMotor : MonoBehaviour {
+public class RaycastMotor : MonoBehaviour {
 
 	public LayerMask collisionMask;
 	public bool drawDebugRaycastOriginCountSpacing = false;
@@ -41,8 +43,8 @@ public class BaseMotor : MonoBehaviour {
 	protected virtual void Update() {
 		if (drawDebugRaycastOriginCountSpacing) {
 			DebugRaycastOriginCountSpacing();
-		}			
-		UpdateRaycastOrigin();
+		}
+		//UpdateRaycastOrigin();
 	}
 
 	/// <summary>
@@ -70,7 +72,7 @@ public class BaseMotor : MonoBehaviour {
 	/// Update the RaycastOrigin struct Vector2 data.
 	///	This may be moved to the struct itself in the future.
 	/// </summary>
-	private void UpdateRaycastOrigin() {
+	protected void UpdateRaycastOrigin() {
 		Bounds bounds = collider.bounds;
 		bounds.Expand(skinWidth * -2f); //2 -> both sides
 
@@ -103,6 +105,6 @@ public class BaseMotor : MonoBehaviour {
 		for (int i = 1; i < horizontalRayCount - 1; i++) {
 			Debug.DrawRay(raycastOrigin.bottomLeft + Vector2.up * (horizontalRaySpacing * i), Vector2.left / 4, color);
 			Debug.DrawRay(raycastOrigin.bottomRight + Vector2.up * (horizontalRaySpacing * i), Vector2.right / 4, color);
-		}			
+		}
 	}
 }

@@ -11,3 +11,20 @@ public struct RaycastOrigin {
 	//Maybe put a Set(Bounds) function and skinWidth variable
 	//Make a property out of the Vector2 with only a get;
 }
+
+public struct CollisionInfo {
+	//General
+	public bool above, below;
+	public bool left, right;
+
+	//Slopes
+	//TODO
+
+	//Direction
+	//FallThrough
+
+	public void Reset() {
+		above = below = false;
+		left = right = false;
+	}
+}
