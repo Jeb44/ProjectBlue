@@ -17,14 +17,20 @@ public struct CollisionInfo {
 	public bool above, below;
 	public bool left, right;
 
-	//Slopes
-	//TODO
-
-	//Direction
-	//FallThrough
+	//TODO: create struct SlopeInfo
+	public bool slopeUp;
+	public bool slopeDown;
+	
+	//Put this inside CharacterMotor
+	public float slopeAngle;
+	public float slopeAngleOld;
 
 	public void Reset() {
 		above = below = false;
 		left = right = false;
+
+		slopeUp = slopeDown = false;
+		slopeAngleOld = slopeAngle;
+		slopeAngle = 0f;
 	}
 }

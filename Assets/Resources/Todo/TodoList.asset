@@ -28,7 +28,7 @@ MonoBehaviour:
     color: {r: 0.509434, g: 0.5073278, b: 0.48300108, a: 1}
     index: 5
   - name: Bug
-    color: {r: 1, g: 0.78079355, b: 0, a: 1}
+    color: {r: 0.57831186, g: 0, b: 0.65882355, a: 1}
     index: 3
   items:
   - owner:
@@ -42,18 +42,6 @@ MonoBehaviour:
       color: {r: 0, g: 0, b: 0, a: 1}
       index: 0
     task: 'Create: DeviceManager | track Devices and Changes'
-    isComplete: 0
-  - owner:
-      name: Done
-      color: {r: 0.509434, g: 0.5073278, b: 0.48300108, a: 1}
-      index: 5
-    task: 'Create: Motor for general Collision/Raycast'
-    isComplete: 1
-  - owner:
-      name: In Progress
-      color: {r: 0, g: 1, b: 1, a: 1}
-      index: 2
-    task: 'Create: Motor for Player (maybe state machine?)'
     isComplete: 0
   - owner:
       name: Normal
@@ -71,17 +59,29 @@ MonoBehaviour:
       name: Normal
       color: {r: 0, g: 0, b: 0, a: 1}
       index: 0
-    task: 'Create: Controller which feeds input into motor'
+    task: 'PlayerController: implement state machine'
     isComplete: 0
   - owner:
       name: Note
       color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
       index: 4
-    task: 'BaseMotor: rearrange RequireComponent'
+    task: 'RaycastMotor: RequireComponent only for BoxCollider?'
     isComplete: 0
   - owner:
       name: Normal
       color: {r: 0, g: 0, b: 0, a: 1}
       index: 0
     task: 'Create: Parallax-Effect (and do some research)'
+    isComplete: 0
+  - owner:
+      name: Bug
+      color: {r: 0.57831186, g: 0, b: 0.65882355, a: 1}
+      index: 3
+    task: 'CharacterMotor: jump doesn''t always work when switching slope up to down'
+    isComplete: 0
+  - owner:
+      name: Normal
+      color: {r: 0, g: 0, b: 0, a: 1}
+      index: 0
+    task: 'PlayerController: get input from InputManger?'
     isComplete: 0
