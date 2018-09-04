@@ -1,5 +1,7 @@
 using UnityEngine;
 
+//TODO create DeviceManager: track available devices, store current device, notify on device changes
+
 public abstract class DeviceTracker : MonoBehaviour {
 
 	public InputAxisKeys[] axisKeys;

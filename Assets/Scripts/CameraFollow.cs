@@ -1,97 +1,98 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+//using System.Collections;
+//using System.Collections.Generic;
+//using UnityEngine;
 
-public class CameraFollow : MonoBehaviour {
 
-	public Controller2D target;
-	public Vector2 focusAreaSize;
-	public float verticalOffset;
-	public float lookAheadDstX;
-	public float lookSmoothTimeX;
-	public float lookSmoothTimeY;
+//public class CameraFollow : MonoBehaviour {
 
-	FocusArea focusArea;
+//	public Controller2D target;
+//	public Vector2 focusAreaSize;
+//	public float verticalOffset;
+//	public float lookAheadDstX;
+//	public float lookSmoothTimeX;
+//	public float lookSmoothTimeY;
 
-	float currentLookAheadX;
-	float targetLookAheadX;
-	float lookAheadDirX;
-	float smoothVelocityX;
-	float smoothVelocityY;
+//	FocusArea focusArea;
 
-	bool lookAheadStopped;
+//	float currentLookAheadX;
+//	float targetLookAheadX;
+//	float lookAheadDirX;
+//	float smoothVelocityX;
+//	float smoothVelocityY;
 
-	void Start() {
-		focusArea = new FocusArea(target.coll.bounds, focusAreaSize);
-	}
+//	bool lookAheadStopped;
 
-	void LateUpdate() {
-		focusArea.Update(target.coll.bounds);
+//	void Start() {
+//		focusArea = new FocusArea(target.coll.bounds, focusAreaSize);
+//	}
 
-		Vector2 focusPosition = focusArea.centre + Vector2.up * verticalOffset;
+//	void LateUpdate() {
+//		focusArea.Update(target.coll.bounds);
 
-		if (focusArea.velocity.x != 0) {
-			lookAheadDirX = Mathf.Sign(focusArea.velocity.x);
-			//TODO: currently only working with Acceleration Time Ground
-			if (Mathf.Sign(target.playerInput.x) == Mathf.Sign(focusArea.velocity.x) && target.playerInput.x != 0){
-				lookAheadStopped = false;
-				targetLookAheadX = lookAheadDirX * lookAheadDstX;
-			} else {
-				if (!lookAheadStopped) {
-					lookAheadStopped = true;
-					targetLookAheadX = currentLookAheadX + (lookAheadDirX * lookAheadDstX - currentLookAheadX) / 4f;
-				}				
-			}
-		}		
-		currentLookAheadX = Mathf.SmoothDamp(currentLookAheadX, targetLookAheadX, ref smoothVelocityX, lookSmoothTimeX);
-		focusPosition += Vector2.right * currentLookAheadX;
-		focusPosition.y = Mathf.SmoothDamp(transform.position.y, focusPosition.y, ref smoothVelocityY, lookSmoothTimeY);
-		transform.position = (Vector3)focusPosition + Vector3.forward * -10;
-	}
+//		Vector2 focusPosition = focusArea.centre + Vector2.up * verticalOffset;
 
-	void OnDrawGizmos() {
-		Gizmos.color = new Color(1f, 0f, 0f, 0.5f);
-		Gizmos.DrawCube(focusArea.centre, focusAreaSize);
-	}
+//		if (focusArea.velocity.x != 0) {
+//			lookAheadDirX = Mathf.Sign(focusArea.velocity.x);
+//			//currently only working with Acceleration Time Ground
+//			if (Mathf.Sign(target.playerInput.x) == Mathf.Sign(focusArea.velocity.x) && target.playerInput.x != 0){
+//				lookAheadStopped = false;
+//				targetLookAheadX = lookAheadDirX * lookAheadDstX;
+//			} else {
+//				if (!lookAheadStopped) {
+//					lookAheadStopped = true;
+//					targetLookAheadX = currentLookAheadX + (lookAheadDirX * lookAheadDstX - currentLookAheadX) / 4f;
+//				}				
+//			}
+//		}		
+//		currentLookAheadX = Mathf.SmoothDamp(currentLookAheadX, targetLookAheadX, ref smoothVelocityX, lookSmoothTimeX);
+//		focusPosition += Vector2.right * currentLookAheadX;
+//		focusPosition.y = Mathf.SmoothDamp(transform.position.y, focusPosition.y, ref smoothVelocityY, lookSmoothTimeY);
+//		transform.position = (Vector3)focusPosition + Vector3.forward * -10;
+//	}
 
-	struct FocusArea {
-		public Vector2 centre;
-		public Vector2 velocity;
-		float left, right;
-		float top, bottom;
+//	void OnDrawGizmos() {
+//		Gizmos.color = new Color(1f, 0f, 0f, 0.5f);
+//		Gizmos.DrawCube(focusArea.centre, focusAreaSize);
+//	}
 
-		public FocusArea(Bounds targetBounds, Vector2 size) {
-			left = targetBounds.center.x - size.x / 2;
-			right = targetBounds.center.x + size.x / 2;
-			bottom = targetBounds.min.y;
-			top = targetBounds.min.y + size.y;
+//	struct FocusArea {
+//		public Vector2 centre;
+//		public Vector2 velocity;
+//		float left, right;
+//		float top, bottom;
 
-			velocity = Vector2.zero;
-			centre = new Vector2((left + right) / 2f, (top + bottom) / 2f);
-		}
+//		public FocusArea(Bounds targetBounds, Vector2 size) {
+//			left = targetBounds.center.x - size.x / 2;
+//			right = targetBounds.center.x + size.x / 2;
+//			bottom = targetBounds.min.y;
+//			top = targetBounds.min.y + size.y;
 
-		public void Update(Bounds targetBounds) {
-			float shiftX = 0;
-			if (targetBounds.min.x < left) {
-				shiftX = targetBounds.min.x - left;
-			} else if (targetBounds.max.x > right) {
-				shiftX = targetBounds.max.x - right;
-			}
-			left += shiftX;
-			right += shiftX;
+//			velocity = Vector2.zero;
+//			centre = new Vector2((left + right) / 2f, (top + bottom) / 2f);
+//		}
 
-			float shiftY = 0;
-			if (targetBounds.min.y < bottom) {
-				shiftY = targetBounds.min.y - bottom;
-			} else if (targetBounds.max.y > top) {
-				shiftY = targetBounds.max.y - top;
-			}
-			top += shiftY;
-			bottom += shiftY;
+//		public void Update(Bounds targetBounds) {
+//			float shiftX = 0;
+//			if (targetBounds.min.x < left) {
+//				shiftX = targetBounds.min.x - left;
+//			} else if (targetBounds.max.x > right) {
+//				shiftX = targetBounds.max.x - right;
+//			}
+//			left += shiftX;
+//			right += shiftX;
 
-			centre = new Vector2((left + right) / 2, (top + bottom) / 2);
-			velocity = new Vector2(shiftX, shiftY);
-		}
-	}
+//			float shiftY = 0;
+//			if (targetBounds.min.y < bottom) {
+//				shiftY = targetBounds.min.y - bottom;
+//			} else if (targetBounds.max.y > top) {
+//				shiftY = targetBounds.max.y - top;
+//			}
+//			top += shiftY;
+//			bottom += shiftY;
 
-}
+//			centre = new Vector2((left + right) / 2, (top + bottom) / 2);
+//			velocity = new Vector2(shiftX, shiftY);
+//		}
+//	}
+
+//}

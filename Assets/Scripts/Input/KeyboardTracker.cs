@@ -10,7 +10,7 @@ public class KeyboardTracker : DeviceTracker {
 			float value = 0f;
 
 			//Evaluate current value
-			//Note: if positive & negative is pressed the value is 0
+			//annotation: if positive & negative is pressed the value is 0
 			if (Input.GetKey(axisKeys[i].positive)) {
 				value += 1f;
 				hasNewData = true;

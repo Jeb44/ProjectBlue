@@ -36,16 +36,15 @@ public struct InputData {
 /// </summary>
 [System.Serializable]
 public struct InputAxisKeys {
+	//InputStructs InputAxisKeys -> Custom Inspector
+	//InputStructs InputAxisKeys -> Add 'advanced' features (description, alternative buttons, etc.)
+
 	/// <summary> Representive name. Do not use to compare values. </summary>
 	public string name;
 	/// <summary> Represents changing the value to 1 </summary>
 	public KeyCode positive;
 	/// <summary> Represents changing the value to -1 </summary>
 	public KeyCode negative;
-
-	//TODO: Custom Inspector
-
-	//Todo (maybe): Add 'advanced' features
 	//public KeyCode altnativePositive;
 	//public KeyCode altnativeNegative;
 	//gravity, sensitivity, etc.
@@ -72,13 +71,13 @@ public struct InputAxisData {
 /// </summary>
 [System.Serializable]
 public struct InputButtonKeys {
+	//InputStructs InputButtonKeys -> Custom Inspector
+	//InputStructs InputButtonKeys -> Add 'advanced' features (description, alternative buttons, etc.)
+
 	/// <summary> Representive name. Do not use to compare values. </summary>
 	public string name;
 	/// <summary> Represents changing the value to true </summary>
 	public KeyCode button;
-
-	//TODO: Custom Inspector
-	//TODO: description, altnatve button etc.
 }
 
 /// <summary> Saves values from button inputs. </summary>

@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//TODO PlayerController -> implement FSM for character states
+//NOTE PlayerController -> implement basic funcitons for OnJumpDown() etc. (?)
+//NOTE PlayerController -> get Input from InputManager
+
 [RequireComponent(typeof(CharacterMotor))]
 public class PlayerController : MonoBehaviour {
 
