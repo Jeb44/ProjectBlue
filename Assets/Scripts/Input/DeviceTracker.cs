@@ -9,11 +9,8 @@ public abstract class DeviceTracker : MonoBehaviour {
 
 	protected InputManager im;
 	protected InputData inputData;
-	protected bool hasNewData;
 
-	protected virtual void Awake() {
-		hasNewData = false;
-	}
+	protected virtual void Awake() {}
 
 	protected virtual void Start() {
 		im = GetComponent<InputManager>();
@@ -69,15 +66,15 @@ public abstract class DeviceTracker : MonoBehaviour {
 		for (int i = 0; i < buttonKeys.Length; i++) {
 			if (Input.GetKeyDown(buttonKeys[i].button)) {
 				inputData.buttons[i].isButtonDown = true;
-				hasNewData = true;
+				inputData.hasNewData = true;
 			}
 			if (Input.GetKey(buttonKeys[i].button)) {
 				inputData.buttons[i].isButton = true;
-				hasNewData = true;
+				inputData.hasNewData = true;
 			}
 			if (Input.GetKeyUp(buttonKeys[i].button)) {
 				inputData.buttons[i].isButtonUp = true;
-				hasNewData = true;
+				inputData.hasNewData = true;
 			}
 		}
 	}
@@ -86,11 +83,9 @@ public abstract class DeviceTracker : MonoBehaviour {
 	/// When new data is there, send it to the InputManager.
 	/// </summary>
 	protected void SendData() {
-		if (hasNewData) {
-			im.TakeInput(inputData, this);
-			inputData.Reset();
-			hasNewData = false;
-		}
+		//im.TakeInput(inputData, this);
+		im.TakeInput(inputData);
+		inputData.Reset();
 	}
 
 	

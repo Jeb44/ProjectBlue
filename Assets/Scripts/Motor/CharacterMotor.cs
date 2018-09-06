@@ -6,7 +6,6 @@ using UnityEngine;
 
 [RequireComponent(typeof(RaycastMotor))]
 public class CharacterMotor : RaycastMotor, IMotor {
-	//CharacterMotor Debug Functions -> DrawRay via boolean and seperate function
 
 	public CollisionInfo collision;
 	public float maxSlopeAngle;
@@ -14,6 +13,8 @@ public class CharacterMotor : RaycastMotor, IMotor {
 	float currentSlopeAngle;
 	float lastSlopeAngle;
 	Vector3 moveOld; //stored in case we detect a slope up while walking a slope down 
+
+	Color color = new Color(1f, 0f, 0f, 0.5f);
 
 	protected override void Awake() {
 		base.Awake();
@@ -61,7 +62,9 @@ public class CharacterMotor : RaycastMotor, IMotor {
 			RaycastHit2D hit = Physics2D.Raycast(rayOrigin, 
 				Vector2.right * dirX, rayLength, collisionMask);
 
-			Debug.DrawRay(rayOrigin, Vector2.right * dirX * rayLength, Color.red);
+			if (drawDebugRays) {
+				Debug.DrawRay(rayOrigin, Vector2.right * dirX * rayLength, color);
+			}
 
 			if (hit) {
 
@@ -118,7 +121,9 @@ public class CharacterMotor : RaycastMotor, IMotor {
 			RaycastHit2D hit = Physics2D.Raycast(rayOrigin,
 				Vector2.up * dirY, rayLength, collisionMask);
 
-			Debug.DrawRay(rayOrigin, Vector2.up * dirY * rayLength, Color.red);
+			if (drawDebugRays) {
+				Debug.DrawRay(rayOrigin, Vector2.up * dirY * rayLength, color);
+			}
 
 			if (hit) {
 				move.y = (hit.distance - raycastOrigin.SkinWidth) * dirY;
@@ -178,7 +183,10 @@ public class CharacterMotor : RaycastMotor, IMotor {
 		float dirX = Mathf.Sign(move.x);
 		Vector2 rayOrigin = (dirX == -1) ? raycastOrigin.BottomRight : raycastOrigin.BottomLeft;
 		RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.down, Mathf.Infinity, collisionMask);
-		Debug.DrawRay(rayOrigin, Vector2.down, Color.blue);
+
+		if (drawDebugRays) {
+			Debug.DrawRay(rayOrigin, Vector2.down, color);
+		}
 
 		if (hit) {
 			float slopeAngle = Vector2.Angle(hit.normal, Vector2.up);

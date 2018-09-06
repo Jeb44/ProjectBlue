@@ -20,11 +20,33 @@ namespace ShaderlabVSCode
                 "/Applications/Visual Studio Code - Insiders.app"
             };
 #elif UNITY_EDITOR_WIN
+            // Thanks hrondleman for reporting and provide fix of bug that 64 bit VSCode on 64 bit Windows
+            // is not correctly opened.
+            var programes64 = GetProgramFilesPath64();
             var programes = GetProgramFilesPath();
-            string[] paths =
+            
+            string[] paths;
+            if (string.IsNullOrEmpty(programes64))
             {
-                programes + Path.AltDirectorySeparatorChar + @"\Microsoft VS Code\bin\code.cmd",
-                programes + Path.AltDirectorySeparatorChar + @"\Microsoft VS Code\bin\code-insiders.cmd"
+                paths = new string[]
+                {
+                    Path.Combine(programes, @"\Microsoft VS Code\bin\code.cmd"),
+                    Path.Combine(programes, @"\Microsoft VS Code\bin\code-insiders.cmd")
+                };
+            }
+            else
+            {
+                paths = new string[] 
+                {
+                    Path.Combine(programes64, @"Microsoft VS Code\bin\code.cmd"),
+                    Path.Combine(programes64, @"Microsoft VS Code\bin\code-insiders.cmd"),
+                    Path.Combine(programes, @"Microsoft VS Code\bin\code.cmd"),
+                    Path.Combine(programes, @"Microsoft VS Code\bin\code-insiders.cmd")
+                };
+            }
+#else
+            string[] paths = new string[]{
+                @"/usr/bin/code"
             };
 #endif
 
@@ -37,6 +59,16 @@ namespace ShaderlabVSCode
             }
 
             return paths[0];
+        }
+
+        private static string GetProgramFilesPath64()
+        {
+            if (8 == IntPtr.Size || (!String.IsNullOrEmpty(Environment.GetEnvironmentVariable("PROCESSOR_ARCHITEW6432"))))
+            {
+                return Environment.GetEnvironmentVariable("ProgramFiles");
+            }
+            
+            return string.Empty;
         }
 
         private static string GetProgramFilesPath()
@@ -86,7 +118,7 @@ namespace ShaderlabVSCode
             }
 
             process.StartInfo.UseShellExecute = false;
-#elif UNITY_EDITOR_WIN
+#else
             process.StartInfo.FileName = codePath;
             process.StartInfo.Arguments = args;
             process.StartInfo.UseShellExecute = false;

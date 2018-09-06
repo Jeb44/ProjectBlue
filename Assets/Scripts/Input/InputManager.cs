@@ -12,7 +12,7 @@ public class InputManager : MonoBehaviour {
 	[Range(0, 4)] public int axisCount;
 	[Range(0, 20)] public int buttonCount;
 
-	private DeviceTracker currentTracker;
+	//private DeviceTracker currentTracker;
 	public PlayerController controller;
 
 	public void RefreshTracker() {
@@ -25,15 +25,22 @@ public class InputManager : MonoBehaviour {
 		}
 	}
 
-	public void TakeInput(InputData inputData, DeviceTracker tracker) {
-		if(currentTracker != tracker) {
-			currentTracker = tracker;
-			Debug.Log("Device changed!");
-		}
+	//public void TakeInput(InputData inputData, DeviceTracker tracker) {
+	//	if(currentTracker != tracker) {
+	//		currentTracker = tracker;
+	//		Debug.Log("Device changed!");
+	//	}
+	//	//DebugInput(inputData);
+	//	//Give input to Controller
+
+	//	//controller.TakeInput(inputData);
+	//}
+
+	public void TakeInput(InputData inputData) {
 		//DebugInput(inputData);
 		//Give input to Controller
-
-		//controller.TakeInput(inputData);
+		//Debug.Log("InputManager received Data!");
+		controller.TakeInput(inputData);
 	}
 
 	void DebugInput(InputData inputData) {

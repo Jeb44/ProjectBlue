@@ -5,6 +5,7 @@ using UnityEngine;
 /// to the Controller.
 /// </summary>
 public struct InputData {
+	public bool hasNewData;
 	public InputAxisData[] axes;
 	public InputButtonData[] buttons;
 
@@ -14,6 +15,7 @@ public struct InputData {
 	/// <param name="axesCount">Current number of axes.</param>
 	/// <param name="buttonsCount">Current number of buttons.</param>
 	public InputData(int axesCount, int buttonsCount) {
+		hasNewData = false;
 		axes = new InputAxisData[axesCount];
 		buttons = new InputButtonData[buttonsCount];
 	}
@@ -27,6 +29,8 @@ public struct InputData {
 		for(int i = 0; i < buttons.Length; i++) {
 			buttons[i].Reset();
 		}
+
+		hasNewData = false;
 	}
 }
 

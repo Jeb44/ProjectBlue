@@ -44,7 +44,7 @@ namespace ShaderlabVSCode
         [MenuItem("Tools/ShaderlabVSCode/Star And Review", false, 33)]
         public static void StarAndReview()
         {
-            Application.OpenURL("https://www.assetstore.unity3d.com/en/#!/account/downloads/search=ShaderlabVSCode");
+            UnityEditorInternal.AssetStore.Open("content/94653");
         }
 
         private static string GetVSXIPath()
@@ -98,34 +98,42 @@ namespace ShaderlabVSCode
         [MenuItem("Tools/ShaderlabVSCode/Update Data of VSCode Extension", false, 22)]
         public static void UpdateData()
         {
-            var extensionsFolder = GetExtensionPath();
-            if (string.IsNullOrEmpty(extensionsFolder))
-            {
-                EditorUtility.DisplayDialog("Not Found", "Seems like there are no ShaderlabVSCode extension installed.", "OK");
-                return;
-            }
-
-            string title = "Updating Data of ShaderlabVSCode Extension";
-            EditorUtility.DisplayProgressBar(title, title, 0);
-            int count = 0;
             bool updated = false;
-            foreach (var pair in DATA_PAIRS)
+            
+            try
             {
-                EditorUtility.DisplayProgressBar(title, title, (count + 1) * 1.0f / DATA_PAIRS.Count);
-                var webContent = GetContentFromWeb(pair.Uri1);
-                var localPath = Path.Combine(extensionsFolder, pair.Uri2);
-                var localContent = File.ReadAllText(localPath);
-
-                int v1 = GetVersionId(webContent);
-                int v2 = GetVersionId(localContent);
-
-                if (v1 > v2)
+                var extensionsFolder = GetExtensionPath();
+                if (string.IsNullOrEmpty(extensionsFolder))
                 {
-                    File.WriteAllText(localPath, webContent);
-                    updated = true;
+                    EditorUtility.DisplayDialog("Not Found", "Seems like there are no ShaderlabVSCode extension installed.", "OK");
+                    return;
                 }
 
-                count ++;
+                string title = "Updating Data of ShaderlabVSCode Extension";
+                EditorUtility.DisplayProgressBar(title, title, 0);
+                int count = 0;
+                
+                foreach (var pair in DATA_PAIRS)
+                {
+                    EditorUtility.DisplayProgressBar(title, title, (count + 1) * 1.0f / DATA_PAIRS.Count);
+                    var webContent = GetContentFromWeb(pair.Uri1);
+                    var localPath = Path.Combine(extensionsFolder, pair.Uri2);
+                    var localContent = File.ReadAllText(localPath);
+
+                    int v1 = GetVersionId(webContent);
+                    int v2 = GetVersionId(localContent);
+
+                    if (v1 > v2)
+                    {
+                        File.WriteAllText(localPath, webContent);
+                        updated = true;
+                    }
+                    count ++;
+                }
+            }
+            catch (System.Exception)
+            {
+               
             }
 
             EditorUtility.ClearProgressBar();

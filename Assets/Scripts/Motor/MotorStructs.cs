@@ -54,7 +54,7 @@ public struct RaycastOrigin {
 /// <summary>
 /// Calculate the number and the distance between rays based on the objects collider size.
 /// </summary>
-public struct RaycastSpacing { //NOTE RacastSpaing -> better name for spacing?
+public struct RaycastSpacing { //NOTE RacastSpacing -> better name for spacing?
 	#region Distance between Rays
 	const float dstBetweenRays = 0.25f;
 	public float DistanceBetweenRays {

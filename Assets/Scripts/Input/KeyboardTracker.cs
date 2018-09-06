@@ -13,11 +13,11 @@ public class KeyboardTracker : DeviceTracker {
 			//annotation: if positive & negative is pressed the value is 0
 			if (Input.GetKey(axisKeys[i].positive)) {
 				value += 1f;
-				hasNewData = true;
+				inputData.hasNewData = true;
 			}
 			if (Input.GetKey(axisKeys[i].negative)) {
 				value -= 1f;
-				hasNewData = true;
+				inputData.hasNewData = true;
 			}
 			
 			inputData.axes[i].Value = value;
