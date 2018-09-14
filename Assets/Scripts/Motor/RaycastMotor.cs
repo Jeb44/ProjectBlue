@@ -13,7 +13,7 @@ public class RaycastMotor : MonoBehaviour {
 	public LayerMask collisionMask;
 	public bool drawDebugRays = false;
 
-	protected new BoxCollider2D collider;
+	[HideInInspector] public new BoxCollider2D collider;
 	protected RaycastOrigin raycastOrigin;
 	protected RaycastSpacing raycastSpacing;
 

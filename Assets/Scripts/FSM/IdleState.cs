@@ -5,18 +5,19 @@ using UnityEngine;
 public class IdleState : BaseState {
 
 	public override BaseState update(InputData input) {
-		base.update(input);
+		ResetGravityOnVerticalCollision();
 
-		if (input.hasNewData) {
+		//Walking
+		if (input.axes[0].Value != 0f) {
+			return new WalkState();
+		}
+		//Dash
+		if (input.buttons[2].isButtonDown) {
 
-			//Walking
-			if (input.axes[0].Value != 0f) {
-				return new WalkState();
-			}
-			//Jumping
-			if (input.buttons[3].isButtonDown && motor.collision.below) {
-				return new JumpUpState();
-			}
+		}
+		//Jumping
+		if (input.buttons[3].isButtonDown && motor.collision.below) {
+			return new JumpUpState();
 		}
 		
 		//Falling off a platform
@@ -24,6 +25,8 @@ public class IdleState : BaseState {
 			return new JumpDownState();
 		}
 
+		AddGravityToMovement();
+		MoveWithMotor();
 		return null;
 	}
 }

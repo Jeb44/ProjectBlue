@@ -88,24 +88,6 @@ MonoBehaviour:
     File: C:\Users\gabri\Documents\Unity\ProjectBlue\Assets\Scripts\Motor\RaycastMotor.cs
     Line: 4
     PathToShow: Assets/Scripts/Motor/RaycastMotor.cs(4)
-  - Text: " test movement -> bugs and other weird stuff\r"
-    Note: 
-    Tag: TODO
-    File: C:\Users\gabri\Documents\Unity\ProjectBlue\Assets\Scripts\FSM\JumpState.cs
-    Line: 6
-    PathToShow: Assets/Scripts/FSM/JumpState.cs(6)
-  - Text: " this if statement might be useless\r"
-    Note: 
-    Tag: NOTE
-    File: C:\Users\gabri\Documents\Unity\ProjectBlue\Assets\Scripts\FSM\JumpState.cs
-    Line: 23
-    PathToShow: Assets/Scripts/FSM/JumpState.cs(23)
-  - Text: " Jump State -> add horizontal movement\r"
-    Note: 
-    Tag: INPROGRESS
-    File: C:\Users\gabri\Documents\Unity\ProjectBlue\Assets\Scripts\FSM\JumpState.cs
-    Line: 5
-    PathToShow: Assets/Scripts/FSM/JumpState.cs(5)
   - Text: " RacastSpacing -> better name for spacing?\r"
     Note: 
     Tag: NOTE
@@ -118,6 +100,30 @@ MonoBehaviour:
     File: C:\Users\gabri\Documents\Unity\ProjectBlue\Assets\Scripts\Motor\MotorStructs.cs
     Line: 118
     PathToShow: Assets/Scripts/Motor/MotorStructs.cs(118)
+  - Text: " Jump State -> add gravity modifier\r"
+    Note: 
+    Tag: TODO
+    File: C:\Users\gabri\Documents\Unity\ProjectBlue\Assets\Scripts\FSM\JumpState.cs
+    Line: 6
+    PathToShow: Assets/Scripts/FSM/JumpState.cs(6)
+  - Text: " test movement -> bugs and other weird stuff\r"
+    Note: 
+    Tag: TODO
+    File: C:\Users\gabri\Documents\Unity\ProjectBlue\Assets\Scripts\FSM\JumpState.cs
+    Line: 7
+    PathToShow: Assets/Scripts/FSM/JumpState.cs(7)
+  - Text: " Jump State -> sometimes movement is looked mid-air\r"
+    Note: 
+    Tag: BUG
+    File: C:\Users\gabri\Documents\Unity\ProjectBlue\Assets\Scripts\FSM\JumpState.cs
+    Line: 5
+    PathToShow: Assets/Scripts/FSM/JumpState.cs(5)
+  - Text: " acces gravity from outside this class\r"
+    Note: 
+    Tag: TODO
+    File: C:\Users\gabri\Documents\Unity\ProjectBlue\Assets\Scripts\FSM\BaseState.cs
+    Line: 40
+    PathToShow: Assets/Scripts/FSM/BaseState.cs(40)
   TagsList:
   - TODO
   - BUG
