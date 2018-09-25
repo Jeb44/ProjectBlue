@@ -6,30 +6,40 @@ using TMPro;
 [RequireComponent(typeof(CharacterMotor))]
 public class PlayerController : MonoBehaviour {
 
-	public float moveSpeed = 6f;
-	public float jumpHeight = 4f;
-	public float timeToJumpApex = .4f;
-
-	public TextMeshProUGUI stateText;
-	public TextMeshProUGUI collisionText;
-	Dictionary<string, bool> debugCollisions;
-
+	//State Variable
+	public CharacterStateVariables variables;
 	[HideInInspector] public float gravity;
 	[HideInInspector] public float jumpVelocity;
 
+	//References
 	[HideInInspector] public CharacterMotor motor;
+	FacingDirection currentDirection;
+
+	//State Machine
 	BaseState currentState;
 
+	[Header("Debug")]
+	public TextMeshProUGUI stateText;
+	public TextMeshProUGUI collisionText;
+	Dictionary<string, bool> debugCollisions;
+	public TextMeshProUGUI directionText;
+	public TextMeshProUGUI moveText;
+
 	void Start () {
+		//TODO get gravity & jumpVelocity from the physics controller
+		gravity = -(2 * variables.jumpHeight) / Mathf.Pow(variables.timeToJumpApex, 2);
+		jumpVelocity = Mathf.Abs(gravity) * variables.timeToJumpApex;
+
+		//References
 		motor = GetComponent<CharacterMotor>();
 
-		gravity = -(2 * jumpHeight) / Mathf.Pow(timeToJumpApex, 2);
-		jumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
-		//Debug.Log("Gravity: " + gravity + " | Jump Velocity: " + jumpVelocity);
-
+		//State Machine setup
 		currentState = new IdleState();
-		currentState.enter(this);
+		currentState.SetReferences(this, motor, new FacingDirection(true));
+		currentState.SetVariables(variables);
+		currentState.enter();
 
+		//Debug
 		debugCollisions = new Dictionary<string, bool> {
 			{ "above", false },
 			{ "below", false },
@@ -38,16 +48,30 @@ public class PlayerController : MonoBehaviour {
 		};
 	}
 
+	/// <summary>
+	/// Main function to let the character move. Handels character states through provided input.
+	/// </summary>
+	/// <param name="inputData">Provides information for state machine to handle the state.</param>
 	public void TakeInput(InputData inputData) {
+
+		//See Explanation on Character FSM on BaseState.cs
+		currentState.SetVariables(variables); //update variables in case the values change in-game (ex. slow effect)
 		BaseState tempState = currentState.update(inputData);
 		if (tempState != null) {
-			//Debug.Log("PlayerController switches State!");
 			currentState.exit();
+
+			tempState.SetReferences(currentState.GetReferences());
+			tempState.SetVariables(currentState.GetVariables());
+
 			currentState = tempState;
-			currentState.enter(this);
-			stateText.text = currentState.stateName();
+			currentState.enter();
 		}
+
+		//Debug
+		stateText.text = currentState.stateName();
 		collisionText.text = DebugCollision();
+		directionText.text = currentState.directionName();
+		moveText.text = currentState.moveName();
 	}
 
 	private string DebugCollision() {
@@ -59,17 +83,13 @@ public class PlayerController : MonoBehaviour {
 
 		//Set Collision Dictionary
 		if (motor.collision.above)
-			//if(debugCollisions.ContainsKey("above"))
-				debugCollisions["above"] = true;
+			debugCollisions["above"] = true;
 		if (motor.collision.below)
-			//if(debugCollisions.ContainsKey("below"))
-				debugCollisions["below"] = true;
+			debugCollisions["below"] = true;
 		if (motor.collision.right)
-			//if(debugCollisions.ContainsKey("right"))
-				debugCollisions["right"] = true;
+			debugCollisions["right"] = true;
 		if (motor.collision.left)
-			//if(debugCollisions.ContainsKey("left"))
-				debugCollisions["left"] = true;
+			debugCollisions["left"] = true;
 
 		//Write collision string
 		string text = "";

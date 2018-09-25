@@ -7,18 +7,23 @@ public class WalkState : BaseState {
 	public override BaseState update(InputData input) {
 		ResetGravityOnVerticalCollision();
 
-		//Left & Right movement
+		//Evaluate left & right input
 		float inputX = input.axes[0].Value;
-		move.x = inputX * player.moveSpeed;
+		move.x = inputX * variables.moveSpeed;
 
 		//Jumping
-		if (input.buttons[3].isButtonDown && motor.collision.below) {
-			return new JumpUpState();
+		if (input.buttons[3].isButtonDown && references.motor.collision.below) {
+			return new JumpState();
+		}
+
+		//Dash
+		if (input.buttons[2].isButtonDown) {
+			return new DashState();
 		}
 
 		//Falling off a platform
-		if (!motor.collision.below) {
-			return new JumpDownState();
+		if (!references.motor.collision.below) {
+			return new FallingState();
 		}
 
 		//When not moving go to idle state
