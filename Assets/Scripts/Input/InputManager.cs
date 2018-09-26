@@ -2,11 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-/* TODO:
- * - create device manager to control current device (+ interface for ui later on)
- * 
- */
-
 public class InputManager : MonoBehaviour {
 
 	[Range(0, 4)] public int axisCount;

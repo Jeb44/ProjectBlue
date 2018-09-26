@@ -63,13 +63,6 @@ MonoBehaviour:
     File: C:\Users\gabri\Documents\Unity\ProjectBlue\Assets\Scripts\Input\InputStructs.cs
     Line: 79
     PathToShow: Assets/Scripts/Input/InputStructs.cs(79)
-  - Text: ": CharacterMotor: jump doesn't always work when switching from slope up
-      to down\r"
-    Note: 
-    Tag: BUG
-    File: C:\Users\gabri\Documents\Unity\ProjectBlue\Assets\Scripts\Motor\CharacterMotor.cs
-    Line: 5
-    PathToShow: Assets/Scripts/Motor/CharacterMotor.cs(5)
   - Text: " IMotor -> create Motor for moving Platforms\r"
     Note: 
     Tag: TODO
@@ -88,18 +81,12 @@ MonoBehaviour:
     File: C:\Users\gabri\Documents\Unity\ProjectBlue\Assets\Scripts\Motor\RaycastMotor.cs
     Line: 4
     PathToShow: Assets/Scripts/Motor/RaycastMotor.cs(4)
-  - Text: " RacastSpacing -> better name for spacing?\r"
+  - Text: " add up/middle/down if needed in the future\r"
     Note: 
     Tag: NOTE
-    File: C:\Users\gabri\Documents\Unity\ProjectBlue\Assets\Scripts\Motor\MotorStructs.cs
-    Line: 57
-    PathToShow: Assets/Scripts/Motor/MotorStructs.cs(57)
-  - Text: " CollisionsInfo: are slopeUp/slopeDown needed as Information in other classes?\r"
-    Note: 
-    Tag: NOTE
-    File: C:\Users\gabri\Documents\Unity\ProjectBlue\Assets\Scripts\Motor\MotorStructs.cs
-    Line: 118
-    PathToShow: Assets/Scripts/Motor/MotorStructs.cs(118)
+    File: C:\Users\gabri\Documents\Unity\ProjectBlue\Assets\Scripts\FSM\StateStructs.cs
+    Line: 6
+    PathToShow: Assets/Scripts/FSM/StateStructs.cs(6)
   - Text: " Jump State -> add gravity modifier\r"
     Note: 
     Tag: TODO
@@ -118,12 +105,49 @@ MonoBehaviour:
     File: C:\Users\gabri\Documents\Unity\ProjectBlue\Assets\Scripts\FSM\JumpState.cs
     Line: 5
     PathToShow: Assets/Scripts/FSM/JumpState.cs(5)
-  - Text: " acces gravity from outside this class\r"
+  - Text: " change character colliders to be flatter or sumthin owo\r"
+    Note: 
+    Tag: TODO
+    File: C:\Users\gabri\Documents\Unity\ProjectBlue\Assets\Scripts\FSM\DashState.cs
+    Line: 15
+    PathToShow: Assets/Scripts/FSM/DashState.cs(15)
+  - Text: " i should not be able to move my dir while moving\r"
+    Note: 
+    Tag: NOTE
+    File: C:\Users\gabri\Documents\Unity\ProjectBlue\Assets\Scripts\FSM\DashState.cs
+    Line: 5
+    PathToShow: Assets/Scripts/FSM/DashState.cs(5)
+  - Text: " get gravity & jumpVelocity from the physics controller\r"
     Note: 
     Tag: TODO
     File: C:\Users\gabri\Documents\Unity\ProjectBlue\Assets\Scripts\FSM\BaseState.cs
-    Line: 40
-    PathToShow: Assets/Scripts/FSM/BaseState.cs(40)
+    Line: 86
+    PathToShow: Assets/Scripts/FSM/BaseState.cs(86)
+  - Text: " RacastSpacing -> better name for spacing?\r"
+    Note: 
+    Tag: NOTE
+    File: C:\Users\gabri\Documents\Unity\ProjectBlue\Assets\Scripts\Motor\MotorStructs.cs
+    Line: 55
+    PathToShow: Assets/Scripts/Motor/MotorStructs.cs(55)
+  - Text: " CollisionsInfo: are slopeUp/slopeDown needed as Information in other classes?\r"
+    Note: 
+    Tag: NOTE
+    File: C:\Users\gabri\Documents\Unity\ProjectBlue\Assets\Scripts\Motor\MotorStructs.cs
+    Line: 113
+    PathToShow: Assets/Scripts/Motor/MotorStructs.cs(113)
+  - Text: ": CharacterMotor: jump doesn't always work when switching from slope up
+      to down\r"
+    Note: 
+    Tag: BUG
+    File: C:\Users\gabri\Documents\Unity\ProjectBlue\Assets\Scripts\Motor\CharacterMotor.cs
+    Line: 5
+    PathToShow: Assets/Scripts/Motor/CharacterMotor.cs(5)
+  - Text: " get gravity & jumpVelocity from the physics controller\r"
+    Note: 
+    Tag: TODO
+    File: C:\Users\gabri\Documents\Unity\ProjectBlue\Assets\Scripts\Controller\PlayerController.cs
+    Line: 28
+    PathToShow: Assets/Scripts/Controller/PlayerController.cs(28)
   TagsList:
   - TODO
   - BUG

@@ -12,7 +12,7 @@ public class CharacterMotor : RaycastMotor, IMotor {
 
 	float currentSlopeAngle;
 	float lastSlopeAngle;
-	Vector3 moveOld; //stored in case we detect a slope up while walking a slope down 
+	Vector2 moveOld; //stored in case we detect a slope up while walking a slope down 
 
 	Color color = new Color(1f, 0f, 0f, 0.5f);
 
@@ -37,21 +37,21 @@ public class CharacterMotor : RaycastMotor, IMotor {
 		moveOld = move;
 
 		if(move.y < 0f) {
-			DescendSlope(ref move);
+			HandleDescendingSlopes(ref move);
 		}
 
 		if(move.x != 0f) {
-			HorizontalCollisions(ref move);
+			HandleHorizontalCollisions(ref move);
 		}
 
 		if(move.y != 0f) {
-			VerticalCollisions(ref move);
+			HandleVerticalCollisions(ref move);
 		}
 
 		transform.Translate(move);
 	}
 
-	void HorizontalCollisions(ref Vector2 move) {
+	void HandleHorizontalCollisions(ref Vector2 move) {
 		float dirX = Mathf.Sign(move.x);
 		float rayLength = Mathf.Abs(move.x) + raycastOrigin.SkinWidth;
 
@@ -89,7 +89,7 @@ public class CharacterMotor : RaycastMotor, IMotor {
 						distanceToSlopeStart = hit.distance - raycastOrigin.SkinWidth;
 						move.x -= distanceToSlopeStart * dirX;
 					}
-					ClimbingSlope(ref move, slopeAngle);
+					HandleClimbingSlopes(ref move, slopeAngle);
 					move.x += distanceToSlopeStart * dirX;
 				}
 
@@ -110,7 +110,7 @@ public class CharacterMotor : RaycastMotor, IMotor {
 		}
 	}
 
-	void VerticalCollisions(ref Vector2 move) {
+	void HandleVerticalCollisions(ref Vector2 move) {
 		float dirY = Mathf.Sign(move.y);
 		float rayLength = Mathf.Abs(move.y) + raycastOrigin.SkinWidth;
 
@@ -162,7 +162,7 @@ public class CharacterMotor : RaycastMotor, IMotor {
 		}
 	}
 
-	void ClimbingSlope(ref Vector2 move, float slopeAngle){
+	void HandleClimbingSlopes(ref Vector2 move, float slopeAngle){
 		float distance = Mathf.Abs(move.x);
 
 		float slopeMoveY = distance * Mathf.Sin(slopeAngle * Mathf.Deg2Rad);
@@ -179,7 +179,7 @@ public class CharacterMotor : RaycastMotor, IMotor {
 		}
 	}
 
-	void DescendSlope(ref Vector2 move) {
+	void HandleDescendingSlopes(ref Vector2 move) {
 		float dirX = Mathf.Sign(move.x);
 		Vector2 rayOrigin = (dirX == -1) ? raycastOrigin.BottomRight : raycastOrigin.BottomLeft;
 		RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.down, Mathf.Infinity, collisionMask);

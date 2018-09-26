@@ -13,7 +13,6 @@ public class PlayerController : MonoBehaviour {
 
 	//References
 	[HideInInspector] public CharacterMotor motor;
-	FacingDirection currentDirection;
 
 	//State Machine
 	BaseState currentState;

@@ -8,10 +8,8 @@ public struct RaycastOrigin {
 	const float skinWidth = 0.015f;
 
 	/// <summary>
-	/// To avoid weird collision between objects, 
-	/// we start our raycasts from inside our collider.
-	/// Keep in mind, that you have to add this value again
-	/// when using any of the RaycastOrigins.
+	/// To avoid weird collision between objects, we start our raycasts from inside our collider.
+	/// Keep in mind, that you have to add this value again when using any of the RaycastOrigins.
 	/// </summary>
 	public float SkinWidth {
 		get { return skinWidth; }
@@ -57,9 +55,6 @@ public struct RaycastOrigin {
 public struct RaycastSpacing { //NOTE RacastSpacing -> better name for spacing?
 	#region Distance between Rays
 	const float dstBetweenRays = 0.25f;
-	public float DistanceBetweenRays {
-		get { return dstBetweenRays; }
-	}
 	#endregion
 
 	#region RayCount
