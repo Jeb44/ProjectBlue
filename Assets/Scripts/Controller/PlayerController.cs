@@ -8,8 +8,6 @@ public class PlayerController : MonoBehaviour {
 
 	//State Variable
 	public CharacterStateVariables variables;
-	[HideInInspector] public float gravity;
-	[HideInInspector] public float jumpVelocity;
 
 	//References
 	[HideInInspector] public CharacterMotor motor;
@@ -25,10 +23,6 @@ public class PlayerController : MonoBehaviour {
 	public TextMeshProUGUI moveText;
 
 	void Start () {
-		//TODO get gravity & jumpVelocity from the physics controller
-		gravity = -(2 * variables.jumpHeight) / Mathf.Pow(variables.timeToJumpApex, 2);
-		jumpVelocity = Mathf.Abs(gravity) * variables.timeToJumpApex;
-
 		//References
 		motor = GetComponent<CharacterMotor>();
 

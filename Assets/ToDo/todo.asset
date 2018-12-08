@@ -4,7 +4,8 @@
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -148,6 +149,13 @@ MonoBehaviour:
     File: C:\Users\gabri\Documents\Unity\ProjectBlue\Assets\Scripts\Controller\PlayerController.cs
     Line: 28
     PathToShow: Assets/Scripts/Controller/PlayerController.cs(28)
+  - Text: ': Code assumes only one grid in scene'
+    Note: 
+    Tag: NOTE
+    File: C:\Users\gabri\Documents\Unity\ProjectBlue\Assets\Plugins\Tilemap\Brushes\Tint
+      Brush Smooth\Scripts\Editor\TintBrushSmooth.cs
+    Line: 17
+    PathToShow: Assets/Plugins/Tilemap/Brushes/Tint Brush Smooth/Scripts/Editor/TintBrushSmooth.cs(17)
   TagsList:
   - TODO
   - BUG
